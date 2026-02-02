@@ -32,7 +32,7 @@ chess-tutor-engine/
 
 ```bash
 git clone <url-du-repo>
-cd chess_tutor_engine
+cd chess_tutor_engine1
 ```
 
 ### 2. Backend (Python / FastAPI)
