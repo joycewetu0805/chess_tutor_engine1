@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: chess-tutor-engine
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /health
+    autoDeploy: true
+

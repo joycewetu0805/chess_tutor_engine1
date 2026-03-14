@@ -88,12 +88,12 @@ cd frontend
 npm run build
 ```
 
-Les fichiers optimises sont generes dans le dossier `frontend/build/`.
+Les fichiers optimises sont generes dans le dossier `frontend/dist/`.
 
 Pour les servir localement :
 
 ```bash
-npx serve -s build
+npx serve -s dist
 ```
 
 ## Commandes utiles
@@ -106,6 +106,18 @@ npx serve -s build
 | `python start_server.py` | Demarre le backend avec rechargement automatique |
 | `pip install -r requirements.txt` | Installe les dependances Python |
 | `npm install --legacy-peer-deps` | Installe les dependances Node.js |
+
+## Deploiement sur Render (recommande)
+
+Ce repo est deployable sur Render via **Docker** (un seul service) : le backend FastAPI sert aussi le frontend compile.
+
+1. Commit + push les fichiers `Dockerfile` et `render.yaml`
+2. Dans Render Dashboard : **New > Blueprint** puis selectionnez ce repo
+3. Cliquez **Apply**
+
+Ensuite, testez :
+- `https://<votre-service>.onrender.com/health`
+- `https://<votre-service>.onrender.com/generate-game?level=1`
 
 ## Fonctionnalites
 

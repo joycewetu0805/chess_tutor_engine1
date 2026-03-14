@@ -1,6 +1,8 @@
 import { useState, useCallback } from "react";
 
-const API_URL = "http://localhost:8000";
+// If VITE_API_URL is unset, use same-origin (works with Vite proxy in dev and
+// with backend-served frontend in production).
+const API_URL = import.meta.env.VITE_API_URL ?? "";
 
 export default function useChessGame() {
   const [moves, setMoves] = useState([]);
@@ -27,7 +29,7 @@ export default function useChessGame() {
         setLoading(false);
       })
       .catch((err) => {
-        setError("Impossible de contacter le serveur. Verifiez que le backend tourne sur le port 8000.");
+        setError("Impossible de contacter le serveur. Verifiez que le backend tourne.");
         setLoading(false);
       });
   }, [level]);

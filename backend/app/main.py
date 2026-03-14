@@ -1,9 +1,11 @@
 from fastapi import FastAPI, Query
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 from typing import List, Optional
 import chess
 import random
+import os
 
 app = FastAPI(title="Chess Tutor Engine")
 
@@ -243,3 +245,10 @@ def generate_game_endpoint(level: int = Query(default=1, ge=1, le=3)):
 @app.get("/health")
 def health():
     return {"status": "ok"}
+
+
+# Serve the built frontend (when present, e.g. in Docker/Render deployments).
+# This is registered last so API routes like /generate-game still win.
+_static_dir = os.path.join(os.path.dirname(__file__), "static")
+if os.path.isfile(os.path.join(_static_dir, "index.html")):
+    app.mount("/", StaticFiles(directory=_static_dir, html=True), name="frontend")
